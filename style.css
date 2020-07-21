@@ -1,0 +1,21 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #000;
+    text-align: left;
+    padding: 0 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #cce9ff;
+  }
+
+.product_list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
