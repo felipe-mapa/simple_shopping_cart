@@ -1,12 +1,10 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
+if (!isset($_SESSION)) {
     session_start();
 }
 require_once('products.php');
 
 $products_array = $products;
-
-$action = (isset($_GET['action'])) ? $_GET['action'] : "";
 
 if (!empty($_POST["action"])) {
     switch ($_POST["action"]) {
@@ -16,12 +14,8 @@ if (!empty($_POST["action"])) {
 
             if (!empty($_SESSION["cart"])) {
                 $cartCodeArray = array_keys($_SESSION["cart"]);
-                if (in_array($newProduct["name"], $cartCodeArray)) {
-                    foreach ($_SESSION["cart"] as $k => $v) {
-                        if ($newProduct["name"] == $k) {
-                            $_SESSION["cart"][$k]["quantity"] = $_SESSION["cart"][$k]["quantity"] + 1;
-                        }
-                    }
+                if (isset($_SESSION["cart"][$newProduct["name"]])) {
+                    $_SESSION["cart"][$newProduct["name"]]["quantity"] += 1;
                 } else {
                     $_SESSION["cart"] = array_merge($_SESSION["cart"], $itemArray);
                 }
